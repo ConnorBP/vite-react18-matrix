@@ -65,7 +65,7 @@ const MatrixRain = (props) => {
         color_scheme_query.addEventListener('change', darkModeChanged);
 
 
-        const draw = (shouldOutput) => {
+        const draw = () => {
             // Black background for the canvas with slight opacity for the trail effect
             if(IS_DARK_MODE) {
                 ctx.fillStyle = "rgba(0, 0, 0, 0.04)";
@@ -81,7 +81,7 @@ const MatrixRain = (props) => {
             // Loop through the columns of the matrix
             for (let i = 0; i < drops.length; i++) {
                 const text = matrix[Math.floor(Math.random() * matrix.length)];
-                if(shouldOutput) ctx.fillText(text, i * font_size, drops[i] * font_size);
+                ctx.fillText(text, i * font_size, drops[i] * font_size);
 
                 // Reset the drop to the top randomly
                 if (drops[i] * font_size > c.height && Math.random() > 0.975) {
@@ -94,9 +94,8 @@ const MatrixRain = (props) => {
 
         const generateStaticFrame = () => {
             for(let i=0;i<100;i++) {
-                draw(true);
+                draw();
             }
-            draw(true);
         };
 
         // Set canvas to full screen
@@ -116,7 +115,7 @@ const MatrixRain = (props) => {
         let interval = null;
         if(isMotionAllowed()) {
             // spawn the render thread on an interval
-            interval = setInterval(draw, Math.floor(1000 / frameRate), true);
+            interval = setInterval(draw, Math.floor(1000 / frameRate));
         } else {
             // if no motion is allowed then we will pre-render some frames to make the bg
             generateStaticFrame();
