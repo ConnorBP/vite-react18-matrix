@@ -17,7 +17,7 @@ function App() {
       </Panel>
       <Panel>
         <Leet name="Connor" />
-        <ColorSelect defaultColor={defaultMatrixColor} newColor={setMatrixColor}></ColorSelect>
+        <ColorSelect defaultColor={defaultMatrixColor} newColor={setMatrixColor} labelText="Matrix Color: "></ColorSelect>
       </Panel>
     </>
   );
