@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import './MatrixRain.css';
 
 
@@ -12,23 +12,36 @@ function isDarkMode() {
 }
 
 function initDrops(width, font_size) {
-    // if (isMotionAllowed()) {
-        // no motion preference
-        let columns = Math.floor(width / font_size);
-        return Array(columns).fill(1);
-    // } else {
-        // does not want motion
-    // }
+    console.log("init drops ", width);
+    let columns = Math.floor(width / font_size);
+    return Array(columns).fill(1);
 }
 
-const MatrixRain = (props) => {
+// for resizing the drops array
+function resize(arr, newSize, defaultValue) {
+    while(newSize > arr.length)
+        arr.push(defaultValue);
+    arr.length = newSize;
+}
+
+const MatrixRain = ({color, font_size=10}) => {
     const canvasRef = useRef(null);
-    const colorRef = useRef(props.color);
+    const colorRef = useRef(color);
+    const raindropsRef = useRef(null);
+    // const [canvasDimensions, setCanvasDimensions] = useState(null);
+
+
     // update color on change
     useEffect(() => {
-        colorRef.current = props.color;
+        colorRef.current = color;
     },
-    [props.color]);
+    [color]);
+
+    useLayoutEffect(() => {
+        // initialize raindrops array once
+        const c = canvasRef.current;
+        raindropsRef.current = initDrops(c.width, font_size);
+    }, []);
 
     // on load useEffect hook
     useEffect(() => {
@@ -46,8 +59,7 @@ const MatrixRain = (props) => {
         // Matrix characters, converted into char array by split
         let matrix = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()*&^%+-/~{[|`]}".split("");
 
-        const font_size = 10;
-        let drops = initDrops(c.width, font_size);
+        let drops = raindropsRef.current;
 
         // cinema framerate teehee
         let frameRate = 23.976;
@@ -103,7 +115,8 @@ const MatrixRain = (props) => {
         const setCanvasSize = () => {
             c.width = window.innerWidth;
             c.height = window.innerHeight;
-            drops = initDrops(c.width, font_size);
+            // drops = initDrops(c.width, font_size);
+            resize(raindropsRef.current, Math.floor(c.width / font_size), 1);
             if(!isMotionAllowed()) {
                 generateStaticFrame();
             }
