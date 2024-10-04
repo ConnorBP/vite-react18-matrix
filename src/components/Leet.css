@@ -1,0 +1,12 @@
+.leet {
+    background-color: #999;
+    border-radius: 25em;
+    padding-left: 10em; padding-right: 10em;
+}
+
+@media(prefers-color-scheme: dark) {
+  .leet {
+    background-color: #222;
+    color: #CCC;
+  }
+}
