@@ -34,11 +34,12 @@ const MatrixRain = (props) => {
     useEffect(() => {
         const c = canvasRef.current;
 
-        // Check if the canvas is available
-        if (!c) {
-            console.error("Canvas not found!");
-            return;
-        }
+        // not needed sanity check
+        // // Check if the canvas is available
+        // if (!c) {
+        //     console.error("Canvas not found!");
+        //     return;
+        // }
 
         const ctx = c.getContext("2d");
 
