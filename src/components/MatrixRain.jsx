@@ -24,7 +24,7 @@ function resize(arr, newSize, defaultValue) {
     arr.length = newSize;
 }
 
-const MatrixRain = ({color, font_size=10}) => {
+const MatrixRain = ({color, font_size=10, frame_rate=23.976}) => {
     const canvasRef = useRef(null);
     const colorRef = useRef(color);
     const raindropsRef = useRef(null);
@@ -60,9 +60,6 @@ const MatrixRain = ({color, font_size=10}) => {
         let matrix = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()*&^%+-/~{[|`]}".split("");
 
         let drops = raindropsRef.current;
-
-        // cinema framerate teehee
-        let frameRate = 23.976;
 
         // hook media queries
         const color_scheme_query = window.matchMedia('(prefers-color-scheme: dark)');
@@ -129,7 +126,7 @@ const MatrixRain = ({color, font_size=10}) => {
         let interval = null;
         if(isMotionAllowed()) {
             // spawn the render thread on an interval
-            interval = setInterval(draw, Math.floor(1000 / frameRate));
+            interval = setInterval(draw, Math.floor(1000 / frame_rate));
         } else {
             // if no motion is allowed then we will pre-render some frames to make the bg
             generateStaticFrame();
