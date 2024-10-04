@@ -6,7 +6,7 @@ function App() {
   const defaultMatrixColor = "#ff00ff";
 
   const [count, setCount] = useState(0);
-  const [matrixColor, setMatrixColor] = useState(defaultMatrixColor)
+  const [matrixColor, setMatrixColor] = useState(defaultMatrixColor);
 
   return (
     <>
