@@ -1,5 +1,4 @@
 import React from "react";
-import ColorSelect from "./ColorSelect.jsx";
 import { motion } from "framer-motion";
 import { Link } from "react-scroll";
 
@@ -16,6 +15,21 @@ export const Navbar = () => {
           segfault1337
         </h1>
       </motion.div>
+      <motion.div
+        initial={{ opacity: 0, x: -50 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.8, delay: 0 }}
+        className="flex flex-col md:flex-row lg:flex-row items-center text-2xl justify-center flex-grow"
+      >
+          <Link
+            to="features"
+            smooth={true}
+            duration={500}
+            offset={-70}
+          >
+            About
+          </Link>
+        </motion.div>
     </nav>
   );
 };

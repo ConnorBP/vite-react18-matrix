@@ -1,11 +1,9 @@
 import { useState } from "react";
 import "./App.css";
-import { Leet, Navbar, Panel, MatrixRain, ColorSelect } from "./components";
+import { Leet, Navbar, Panel, MatrixRain, ColorSelect, Button } from "./components";
 
 function App() {
   const defaultMatrixColor = "#ff00ff";
-
-  const [count, setCount] = useState(0);
   const [matrixColor, setMatrixColor] = useState(defaultMatrixColor);
 
   return (
@@ -13,11 +11,12 @@ function App() {
       <MatrixRain color={matrixColor} />
       <Panel>
         <Navbar></Navbar>
-        <h1>Hello Ya'll</h1>
+        <h1>welcome to the matrix</h1>
       </Panel>
       <Panel>
         <Leet name="Connor" />
         <ColorSelect defaultColor={defaultMatrixColor} newColor={setMatrixColor} labelText="Matrix Color: "></ColorSelect>
+        <Button>Hello World</Button>
       </Panel>
     </>
   );

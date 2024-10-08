@@ -4,5 +4,6 @@ import Footer from "./Footer";
 import { Navbar } from "./Navbar";
 import MatrixRain from "./MatrixRain";
 import Panel from "./Panel";
+import Button from "./Button"
 
-export { Leet, ColorSelect, Footer, Navbar, Panel, MatrixRain };
+export { Leet, Button, ColorSelect, Footer, Navbar, Panel, MatrixRain };
